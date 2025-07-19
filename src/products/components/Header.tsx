@@ -13,5 +13,10 @@ const Header = ({ title }: HeaderProps) => {
 		</Section>
 	)
 }
+// in js
+// import PropTypes from "prop_types"
+// Header.PropTypes = {
+// 	title.Proptypes.string.isRequired
+// }
 
 export default Header

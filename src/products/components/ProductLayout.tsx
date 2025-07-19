@@ -1,13 +1,13 @@
 import AddButton from './AddButton'
 import Header from './Header'
-import ProductList from './ProductList'
+import ListProduct from './ListProduct'
 
 const ProductLayout = () => {
 	return (
 		<>
 			<Header title="Product app" />
 			<AddButton />
-			<ProductList />
+			<ListProduct />
 		</>
 	)
 }
