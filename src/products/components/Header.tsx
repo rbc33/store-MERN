@@ -1,7 +1,10 @@
-import React from 'react'
 import { Container, Section } from 'react-bulma-components'
 
-const Header = ({ title }) => {
+interface HeaderProps {
+	title: String
+}
+
+const Header = ({ title }: HeaderProps) => {
 	return (
 		<Section>
 			<Container>
