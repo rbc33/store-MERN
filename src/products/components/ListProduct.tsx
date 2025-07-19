@@ -6,8 +6,16 @@ const ListProduct = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 
 	useEffect(() => {
-		console.log('useEffect')
+		const timeId = setInterval(() => {
+			console.log('useEffect')
+			setIsLoading(!isLoading)
+		}, 2000)
+
+		return () => clearInterval(timeId)
 	})
+	useEffect(() => {
+		console.log('useEfectOnce')
+	}, [isLoading])
 	return <>{isLoading ? <Loading /> : 'di cosas'}</>
 }
 export default ListProduct
