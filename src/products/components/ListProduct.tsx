@@ -1,23 +1,11 @@
-import { useEffect, useState } from 'react'
-import { type Product, getProducts } from '../services'
-import Loading from './Loading'
 import { Container, Section } from 'react-bulma-components'
+import { type Product } from '../services'
 
-const ListProduct = () => {
-	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [products, setProducts] = useState<Product[] | null>(null)
+interface ListProductProps {
+	products: Product[] | null
+}
 
-	useEffect(() => {
-		const loadProducts = async () => {
-			const res = await getProducts()
-			if (res.status === 200) {
-				setProducts(res.data)
-			}
-			setIsLoading(false)
-		}
-		loadProducts()
-	}, [])
-	if (isLoading) return <Loading />
+const ListProduct = ({ products }: ListProductProps) => {
 	if (!products)
 		return (
 			<h2 className="title has-text-cententered">
@@ -32,8 +20,8 @@ const ListProduct = () => {
 					{products.map((product) => {
 						;<>
 							<img src={product.imgUrl} />
-							<p>name: {product.nombre}</p>
-							<p>descrption: {product.descripcion}</p>
+							<p>name: {product.name}</p>
+							<p>descrption: {product.description}</p>
 							<p>size: {product.size}</p>
 							<p>price: {product.unitaryPrice}</p>
 						</>
