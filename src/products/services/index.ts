@@ -2,6 +2,7 @@ import axios, { type AxiosResponse } from 'axios'
 import { BASE_URL } from '../../utils/config'
 
 export type Product = {
+	_id: string
 	name: string
 	description: string
 	size: number | string

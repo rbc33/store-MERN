@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Button, Modal } from 'react-bulma-components'
+import { Button, Container, Modal } from 'react-bulma-components'
 import AddButton from './AddButton'
 import Header from './Header'
 import ListProduct from './ListProduct'
@@ -10,7 +10,7 @@ import Loading from './Loading'
 const ProductLayout = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [products, setProducts] = useState<Product[] | null>(null)
+	const [products, setProducts] = useState<Product[] | []>([])
 	const loadProducts = async () => {
 		const res = await getProducts()
 		if (res.status === 200) {
@@ -27,15 +27,15 @@ const ProductLayout = () => {
 		setIsModalOpen(false)
 	}
 	return (
-		<>
+		<Container>
 			<Header title="Product app" />
 			<AddButton onClick={() => setIsModalOpen(true)} />
-			<ListProduct products={products} />
-			{!products?.length && (
+			{!isLoading && !products.length && (
 				<h2 className="title has-text-cententered">
 					You don't have products yet
 				</h2>
 			)}
+			{!isLoading && <ListProduct products={products} />}
 			{isLoading && <Loading />}
 			<Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
 				<Modal.Card>
@@ -54,7 +54,7 @@ const ProductLayout = () => {
 					</Modal.Card.Body>
 				</Modal.Card>
 			</Modal>
-		</>
+		</Container>
 	)
 }
 

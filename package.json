@@ -10,13 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "axios": "^1.10.0",
     "bulma": "^1.0.4",
     "dotenv": "^17.2.0",
     "multer": "^2.0.2",
     "react": "^19.1.0",
     "react-bulma-components": "^4.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.60.0",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

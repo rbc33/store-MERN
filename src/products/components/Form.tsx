@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react'
 import { PostProduct } from '../services'
+
 interface FormProps {
 	handleSubmit: (data: PostProduct) => void
 }
+
 const Form = ({ handleSubmit }: FormProps) => {
 	const [fileName, setFileName] = useState('Image')
 	const inputFileRef = useRef<HTMLInputElement>(null)
@@ -56,7 +58,7 @@ const Form = ({ handleSubmit }: FormProps) => {
 				<div className="control">
 					<input
 						className="input"
-						type="number"
+						type="text"
 						placeholder="Enter size"
 						name="size"
 						value={formValues.size}
