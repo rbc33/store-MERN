@@ -1,39 +1,46 @@
-import { Button } from 'react-bulma-components'
-import Loading from './Loading'
 import { useEffect, useState } from 'react'
-import axios, { Axios } from 'axios'
-import { BASE_URL } from '../../utils/config'
+import { type Product, getProducts } from '../services'
+import Loading from './Loading'
+import { Container, Section } from 'react-bulma-components'
 
-type Product = {
-	nombre: string
-	descripcion: string
-	size: number
-	unitaryPrice: number
-	imgUrl: string
-}
-const getProducts = async () => {
-	axios({
-		url: `${BASE_URL}/products`,
-		method: 'GET',
-	})
-		.then((res) => {
-			return res
-		})
-		.catch((e) => console.log(e))
-}
 const ListProduct = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [products, setProducts] = useState<Product[] | []>([])
+	const [products, setProducts] = useState<Product[] | null>(null)
 
 	useEffect(() => {
 		const loadProducts = async () => {
-			const res = getProducts()
-			console.log(res)
-			return res
+			const res = await getProducts()
+			if (res.status === 200) {
+				setProducts(res.data)
+			}
+			setIsLoading(false)
 		}
 		loadProducts()
-	})
-
-	return <>{isLoading ? <Loading /> : 'di cosas'}</>
+	}, [])
+	if (isLoading) return <Loading />
+	if (!products)
+		return (
+			<h2 className="title has-text-cententered">
+				You don't have products yet
+			</h2>
+		)
+	return (
+		<>
+			<Section>
+				<Container>
+					<h1 className="title has-text-cententered">Products:</h1>
+					{products.map((product) => {
+						;<>
+							<img src={product.imgUrl} />
+							<p>name: {product.nombre}</p>
+							<p>descrption: {product.descripcion}</p>
+							<p>size: {product.size}</p>
+							<p>price: {product.unitaryPrice}</p>
+						</>
+					})}
+				</Container>
+			</Section>
+		</>
+	)
 }
 export default ListProduct

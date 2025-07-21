@@ -1,7 +1,7 @@
 import { Container, Section } from 'react-bulma-components'
 
 interface HeaderProps {
-	title: String
+	title: string
 }
 
 const Header = ({ title }: HeaderProps) => {
